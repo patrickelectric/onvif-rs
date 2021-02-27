@@ -37,6 +37,7 @@ pub async fn request<T: Transport, R: YaSerialize, S: YaDeserialize>(
 
     let de = |s: &str| yaserde::de::from_str(s).map_err(Error::Deserialization);
 
+    println!(">> {:#?}", transport.request(&crop_xml_declaration(&ser(&request)?)).await);
     de(&transport
         .request(&crop_xml_declaration(&ser(&request)?))
         .await?)
